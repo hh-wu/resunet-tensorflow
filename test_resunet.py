@@ -31,4 +31,3 @@ class ResUNetTests(unittest.TestCase):
         self.assertEqual(output.shape[0], input_shape[0])
         self.assertEqual(output.shape[1], input_shape[1])
         self.assertEqual(output.shape[2], classes)
-

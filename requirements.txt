@@ -1,0 +1,5 @@
+tensorflow
+setuptools
+argparse
+numpy
+parameterized
