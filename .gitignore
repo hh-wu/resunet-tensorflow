@@ -212,3 +212,6 @@ fabric.properties
 .idea/
 logs
 venv
+
+ResUNet-transformer
+dataset
