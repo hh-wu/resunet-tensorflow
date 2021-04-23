@@ -21,13 +21,14 @@ model = ResUNet(input_shape=(128, 128, 1), classes=2, filters_root=16, depth=3)
 # compile the model
 # categorical crossentropy is the preferred loss function
 model.compile(loss="categorical_crossentropy", optimizer="adam",
-                  metrics=["categorical_accuracy", "some other metrics"])
+              metrics=["categorical_accuracy", "some other metrics"])
 
 # obtain the dataset
 x, y, validation_dataset = ...
 
 # use model.fit, model.evalute as with any other tf2 model
-model.fit(x=x, y=y, validation_data=validation_dataset, epochs=args.epochs, batch_size=args.batch_size)
+model.fit(x=x, y=y, validation_data=validation_dataset, epochs=args.epochs,
+          batch_size=args.batch_size)
 ```
 
 Alternatively you can use repository's script *train.py*, although it is not recommended.

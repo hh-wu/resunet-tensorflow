@@ -1,18 +1,21 @@
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import *
-
+from tensorflow.keras.activations import sigmoid
 from resunet.blocks import ResBlock
 
 import math
 
 
-def ResUNet(input_shape, classes: int, filters_root: int = 64, depth: int = 3):
+def ResUNet(input_shape, classes: int, filters_root: int = 64,
+            depth: int = 3,
+            final_activation='softmax'):
     """
     Builds ResUNet model.
     :param input_shape: Shape of the input images (h, w, c). Note that h and w must be powers of 2.
     :param classes: Number of classes that will be predicted for each pixel. Number of classes must be higher than 1.
     :param filters_root: Number of filters in the root block.
     :param depth: Depth of the architecture. Depth must be <= min(log_2(h), log_2(w)).
+    :param final_activation: final activation function. Default is softmax.
     :return: Tensorflow model instance.
     """
     if classes < 2:
@@ -60,7 +63,12 @@ def ResUNet(input_shape, classes: int, filters_root: int = 64, depth: int = 3):
         layer = ResBlock(filters, strides=1)(layer)
 
     layer = Conv2D(filters=classes, kernel_size=1, strides=1, padding="same")(layer)
-    layer = Softmax()(layer)
+    if final_activation.lower() == 'sigmoid':
+        layer = Activation('sigmoid')(layer)
+    else:
+        layer = Softmax()(layer)
+
+
 
     output = layer
 

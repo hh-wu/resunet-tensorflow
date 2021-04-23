@@ -1,5 +1,5 @@
-from sklearn.model_selection import train_test_split
 import numpy as np
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
 dataset = np.load('c:/datasets/transformer/dataset_mat.npy')
@@ -7,7 +7,6 @@ dataset = np.load('c:/datasets/transformer/dataset_mat.npy')
 # x_train, x_valid, y_train, y_valid = train_test_split(X_edf, Y,
 #                                                       test_size=0.33,
 #                                                       shuffle=True)
-
 # 将dataset搞成256*256大小，之前大小是3375*237*253*4
 dataset_256_256 = np.pad(dataset, ((0, 0), (0, 0), (3, 0), (0, 0)), 'constant',
                          constant_values=0)
@@ -41,12 +40,24 @@ X[:, :, :, 1] = All_data_scaled_edf[:, 1].reshape(datasize_train, row, col)
 Y[:, :, :, 0] = All_data_scaled_edf[:, 2].reshape(datasize_train, row, col)
 Y[:, :, :, 1] = 1 - All_data_scaled_edf[:, 2].reshape(datasize_train, row, col)
 
-from sklearn.model_selection import train_test_split
-
 # Split the data
 x_train, x_valid, y_train, y_valid = train_test_split(X, Y, test_size=0.33,
                                                       shuffle=True)
 
+# check
+assert x_train.shape[1] == 256
+assert x_train.shape[2] == 256
+
+assert x_valid.shape[1] == 256
+assert x_valid.shape[2] == 256
+
+assert y_train.shape[1] == 256
+assert y_train.shape[2] == 256
+
+assert y_valid.shape[1] == 256
+assert y_valid.shape[2] == 256
+
+# save dataset
 np.savez('dataset/scaled_transformer_256.npz',
-        x_train=x_train, x_valid=x_valid,
-        y_train=y_train, y_valid=y_valid)
+         x_train=x_train, x_valid=x_valid,
+         y_train=y_train, y_valid=y_valid)

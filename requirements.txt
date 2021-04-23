@@ -3,3 +3,5 @@ setuptools
 argparse
 numpy
 parameterized
+matplotlib
+scikit-learn
