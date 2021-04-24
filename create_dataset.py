@@ -44,7 +44,7 @@ Y[:, :, :, 1] = 1 - All_data_scaled_edf[:, 2].reshape(datasize_train, row, col)
 x_train, x_valid, y_train, y_valid = train_test_split(X, Y, test_size=0.33,
                                                       shuffle=True)
 
-# check
+# check shape
 assert x_train.shape[1] == 256
 assert x_train.shape[2] == 256
 
@@ -56,6 +56,11 @@ assert y_train.shape[2] == 256
 
 assert y_valid.shape[1] == 256
 assert y_valid.shape[2] == 256
+
+# check padded data
+
+# check scaled data
+
 
 # save dataset
 np.savez('dataset/scaled_transformer_256.npz',

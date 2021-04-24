@@ -38,13 +38,13 @@ def train(model, trainer, x_train, y_train, x_valid, y_valid):
     validation_dataset = tf.data.Dataset.from_tensor_slices(
         (x_valid, y_valid))
 
-    # model.compile(loss="categorical_crossentropy", optimizer="adam",
-    #               metrics=["categorical_accuracy", ssim_loss, custom_loss])
-    # trainer.fit(model=model,
-    #             train_dataset=train_dataset,
-    #             validation_dataset=validation_dataset,
-    #             epochs=10,
-    #             batch_size=32)
+    model.compile(loss="categorical_crossentropy", optimizer="adam",
+                  metrics=["categorical_accuracy", ssim_loss, custom_loss])
+    trainer.fit(model=model,
+                train_dataset=train_dataset,
+                validation_dataset=validation_dataset,
+                epochs=10,
+                batch_size=32)
 
     model.compile(loss=custom_loss, optimizer="adam",
                   metrics=["categorical_accuracy", ssim_loss, custom_loss])
